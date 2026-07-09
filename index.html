@@ -148,6 +148,7 @@
 
 <div class="wrap">
   <p class="hint">One form submission goes through one Zapier zap today, out to Engage and Mandrill. Freshsales is the leg being added, additive, not a replacement for either. Click any box to see what data goes there, and what's still a gap.</p>
+  <p class="hint">See also: <a href="https://robshammond-dot.github.io/T4TSalesPipeline/" target="_blank" rel="noopener">Freshsales Implementation Plan</a>, what happens once an enquiry actually lands, starting at the New stage.</p>
 
   <div class="diagram-card">
   <svg class="pipeline" viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
@@ -200,6 +201,22 @@
   </div>
 
   <div class="ref-card">
+    <h3>Webform Considerations for Field Mapping</h3>
+    <div class="ref-text"><ul>
+      <li><b>Name / Surname:</b> clean two-field match to Freshsales' First Name / Last Name, no title or middle name field on the form to worry about.</li>
+      <li><b>Code + Phone Number:</b> these are two separate fields on the form. Confirm whether Freshsales' Mobile field expects one combined international-format string (e.g. +27821234567) or separate parts, if it wants one field, the code and number need concatenating before mapping, not passed through as two raw values.</li>
+      <li><b>Prefer to be contacted by:</b> a simple Phone/Email toggle, but worth deciding whether it just sits as a field, or actually influences which channel the follow-up sequences use, a customer who ticked "Phone" probably shouldn't only ever get email nudges.</li>
+      <li><b>Departure Point:</b> this is a dropdown with a fixed set of options on the form. If the Freshsales field is also a picklist, its option list needs to match the webform's exactly, or values land as unmatched free text and break any reporting built on that field. Worth pulling the full list of dropdown options from the form before setting this up.</li>
+      <li><b>Start Date / End Date:</b> confirm date format (day/month/year vs month/day/year) matches what Freshsales expects, a mismatched date format is a common, easy-to-miss import fault.</li>
+      <li><b>My dates are flexible:</b> a simple checkbox; worth deciding whether this becomes its own Freshsales field or just informs the free-text enquiry notes.</li>
+      <li><b>Adults / Children / Childrens Ages:</b> Adults and Children are numeric, but Childrens Ages is free text, likely comma-separated ages typed by the traveller. That's not clean, structured data, it'll need a consultant to read and interpret it manually during Consulting, not something to assume arrives report-ready.</li>
+      <li><b>Message:</b> free text. Worth deciding whether this populates a Deal's notes field directly, or whether the consultant is expected to pull the relevant details out into structured fields themselves as part of profiling.</li>
+      <li><b>Reference and package page link:</b> covered in the Engage and Freshsales cards above, the reference code works today, the page link is the named gap.</li>
+      <li><b>Sign up for more travel deals:</b> covered in the Two Populations and Freshsales cards, needs to become a real subscription record, not just a submitted tick.</li>
+    </ul></div>
+  </div>
+
+  <div class="ref-card">
     <h3>Two Populations: Enquiry vs Marketing Contacts</h3>
     <div class="pop-wrap">
       <div class="pop-card enquiry">
@@ -228,7 +245,7 @@
 
   <div class="ref-card">
     <h3>Open Question: More Contacts Elsewhere?</h3>
-    <div class="ref-text">The current Freshsales contact base comes from the FreshChat migration. Whether other contact sources exist that haven't been imported, old spreadsheets, a previous system, customer records sitting in UDMS, isn't established. Worth checking before assuming Freshsales currently holds the complete picture of who's actually a Thompsons customer or enquirer.</div>
+    <div class="ref-text">The current Freshsales contact base comes from the FreshChat migration. Whether other contact sources exist that haven't been imported, old spreadsheets, a previous system, customer records sitting in UDMS, isn't established.</div>
   </div>
 </div>
 
