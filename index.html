@@ -217,6 +217,19 @@
   </div>
 
   <div class="ref-card">
+    <h3>Auto Assignment: Destination Detection for Round Robin</h3>
+    <div class="ref-text">
+      <p>Round robin needs to know whether an enquiry is Africa/Dubai/Far East/Indian Ocean Islands or Worldwide before it can route by specialism. Nothing reaching Freshsales today tells it that, the reference code alone doesn't name a destination, so auto assignment on destination isn't ready to go live yet.</p>
+      <ul>
+        <li><b>The URL is the answer, once it flows through.</b> Real package URLs confirm the destination sits in plain English in the slug, alongside the reference code as its own path segment. A Stellenbosch property and a Mozambique property both name the destination directly ahead of the "package" and "nights" wording. That's simple keyword matching against a short place name list, not a lookup table for decoding opaque reference codes.</li>
+        <li><b>The open question:</b> is the full URL already present in the raw Zapier trigger payload, just never mapped anywhere downstream, in which case adding it to the Freshsales action step being built now is a small field mapping addition, or does the webform genuinely never capture or send it, in which case a hidden field needs adding to the form itself first. Worth putting directly to Kim.</li>
+        <li><b>Slug noise to expect:</b> a leading star rating digit, package type wording like "self drive," a nights count, and sometimes a trailing number for duplicate slugs. Worth sampling a real batch of URLs before relying on this, and mapping both city names (Stellenbosch) and country names (Mozambique) to the correct group.</li>
+        <li><b>Phased approach:</b> a manual Destination Group field in Freshsales now, round robin routes off it immediately with no dependency on any Zap change; a suggestion panel on this tool next, paste the URL and get a suggested group to confirm; full automation only once the URL question is settled and place name matching is proven over real volume.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ref-card">
     <h3>Two Populations: Enquiry vs Marketing Contacts</h3>
     <div class="pop-wrap">
       <div class="pop-card enquiry">
